@@ -1,0 +1,142 @@
+<div class="col-md-6 col-md-offset-3 jumbotron" style="margin-top:10%;">
+  <form #userform="ngForm" class="form-group">
+    <div>
+      <label style="text-align:left">Name:</label>
+      <input
+        [(ngModel)]="user.username"
+        class="form-control"
+        type="text"
+        name="username"
+        id="username"
+        style="width:500px;"
+        required
+        minlength="8"
+        #username="ngModel"
+      />
+      <div
+        *ngIf="username.invalid && (username.dirty || username.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="username.errors['required']">Name is required.</div>
+        <div *ngIf="username.errors['minlength']">
+          Name must be at least 8 characters long.
+        </div>
+      </div>
+    </div>
+    <!--{{userform.value |  json}}-->
+    <div>
+      <p>
+        Email ID:<input
+          [(ngModel)]="user.emailid"
+          [email]="true"
+          class="form-control"
+          type="email"
+          name="emailid"
+          id="emailid"
+          style="width:500px;"
+          required
+          pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+          #emailid="ngModel"
+        />
+      </p>
+
+      <div
+        *ngIf="emailid.invalid && (emailid.dirty || emailid.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="emailid.errors['required']">emailid is required.</div>
+        <div *ngIf="emailid.errors['pattern']">Enter a valid emailid</div>
+      </div>
+    </div>
+    <div>
+      <p>
+        password:<input
+          [(ngModel)]="user.password"
+          class="form-control"
+          type="text"
+          name="password"
+          id="password"
+          style="width:500px;"
+          required
+          minlength="8"
+          #password="ngModel"
+        />
+      </p>
+
+      <div
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="password.errors['required']">password is required.</div>
+        <div *ngIf="password.errors['minlength']">
+          password must be at least 8 characters long.
+        </div>
+      </div>
+    </div>
+    <div>
+      <p>
+        phone Number:<input
+          [(ngModel)]="user.phnnum"
+          class="form-control"
+          type="tel"
+          name="phnnum"
+          id="phnnum"
+          style="width:500px;"
+          required
+          minlength="10"
+          maxlength="10"
+          #phnnum="ngModel"
+        />
+      </p>
+
+      <div
+        *ngIf="phnnum.invalid && (phnnum.dirty || phnnum.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="phnnum.errors['required']">phone number is required.</div>
+        <div *ngIf="phnnum.errors['minlength']">number must be 10 digits</div>
+      </div>
+    </div>
+    <div>
+      <label>gender:</label>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gender"
+          id="male"
+          class="form-control"
+          value="male"
+          [(ngModel)]="user.gender"
+          style="width:100px;"
+          required
+        />
+        <label class="form-check-label">male</label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gender"
+          id="female"
+          class="form-control"
+          value="female"
+          [(ngModel)]="user.gender"
+          style="width:100px;"
+          required
+        />
+        <label class="form-check-label"> female</label>
+      </div>
+    </div>
+  </form>
+
+  <div>
+    <button
+      [disabled]="userform.form.invalid"
+      class="btn btn-success"
+      (click)="addUser()"
+    >
+      submit
+    </button>
+  </div>
+</div>
